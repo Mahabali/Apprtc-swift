@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>95334D3C-D038-4792-A42E-8FA387C70EA0</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E58039B0DAF33116B82B96D42CE9C48294E2764C</key>
+		<string>https://github.com/Mahabali/Apprtc-swift.git</string>
+	</dict>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E58039B0DAF33116B82B96D42CE9C48294E2764C</key>
+		<string>Apprtc-swift/</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Mahabali/Apprtc-swift.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E58039B0DAF33116B82B96D42CE9C48294E2764C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E58039B0DAF33116B82B96D42CE9C48294E2764C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Apprtc-swift</string>
+		</dict>
+	</array>
+</dict>
+</plist>
