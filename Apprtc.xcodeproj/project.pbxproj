@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		975A57EB1BCFCAC1008F6AB9 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 975A57EA1BCFCAC1008F6AB9 /* SRWebSocket.m */; };
+		D863B1131C932B0000DE1C4C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D863B1121C932B0000DE1C4C /* VideoToolbox.framework */; };
 		D875EE851B9C03AE008B1DF3 /* ARDAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D875EE551B9C03AE008B1DF3 /* ARDAppClient.m */; };
 		D875EE861B9C03AE008B1DF3 /* ARDMessageResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D875EE571B9C03AE008B1DF3 /* ARDMessageResponse.m */; };
 		D875EE871B9C03AE008B1DF3 /* ARDRegisterResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D875EE591B9C03AE008B1DF3 /* ARDRegisterResponse.m */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		975A57EA1BCFCAC1008F6AB9 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = ../SRWebSocket.m; sourceTree = "<group>"; };
 		976E3D501BCE64DF002486D5 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		D863B1121C932B0000DE1C4C /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		D875EE541B9C03AE008B1DF3 /* ARDAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDAppClient.h; sourceTree = "<group>"; };
 		D875EE551B9C03AE008B1DF3 /* ARDAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDAppClient.m; sourceTree = "<group>"; };
 		D875EE561B9C03AE008B1DF3 /* ARDMessageResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDMessageResponse.h; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D863B1131C932B0000DE1C4C /* VideoToolbox.framework in Frameworks */,
 				D875EEA31B9C051C008B1DF3 /* libc++.dylib in Frameworks */,
 				D875EE9C1B9C0496008B1DF3 /* AudioToolbox.framework in Frameworks */,
 				D875EE9D1B9C0496008B1DF3 /* CoreGraphics.framework in Frameworks */,
@@ -220,6 +223,7 @@
 		D878BE441B9B6110001AE9CD = {
 			isa = PBXGroup;
 			children = (
+				D863B1121C932B0000DE1C4C /* VideoToolbox.framework */,
 				976E3D501BCE64DF002486D5 /* BridgingHeader.h */,
 				D875EEA21B9C051C008B1DF3 /* libc++.dylib */,
 				D875EE961B9C0496008B1DF3 /* AudioToolbox.framework */,
@@ -542,8 +546,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Apprtc/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -551,7 +557,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mahabali.apprtc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "458e5811-4cab-43ee-9b8a-b84ed184676a";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
 			};
 			name = Debug;
@@ -561,9 +567,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: DHILIP RAVIEENDRAN (25TASZ9W5C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Apprtc/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -571,7 +578,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mahabali.apprtc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "458e5811-4cab-43ee-9b8a-b84ed184676a";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
 			};
 			name = Release;
