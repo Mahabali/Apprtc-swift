@@ -1,6 +1,6 @@
 /*
  * libjingle
- * Copyright 2013, Google Inc.
+ * Copyright 2013 Google Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -29,6 +29,21 @@
 
 @class RTCAudioTrack;
 @class RTCVideoTrack;
+@class RTCMediaStream;
+@class RTCMediaStreamTrack;
+
+@protocol RTCMediaStreamDelegate<NSObject>
+
+- (void)OnAddAudioTrack:
+    (RTCMediaStream*)mediaStream track:(RTCMediaStreamTrack*)track;
+- (void)OnAddVideoTrack:
+    (RTCMediaStream*)mediaStream track:(RTCMediaStreamTrack*)track;
+- (void)OnRemoveAudioTrack:
+    (RTCMediaStream*)mediaStream track:(RTCMediaStreamTrack*)track;
+- (void)OnRemoveVideoTrack:
+    (RTCMediaStream*)mediaStream track:(RTCMediaStreamTrack*)track;
+
+@end
 
 // RTCMediaStream is an ObjectiveC wrapper for MediaStreamInterface.
 @interface RTCMediaStream : NSObject
@@ -36,6 +51,7 @@
 @property(nonatomic, strong, readonly) NSArray *audioTracks;
 @property(nonatomic, strong, readonly) NSArray *videoTracks;
 @property(nonatomic, strong, readonly) NSString *label;
+@property(nonatomic, weak) id<RTCMediaStreamDelegate> delegate;
 
 - (BOOL)addAudioTrack:(RTCAudioTrack *)track;
 - (BOOL)addVideoTrack:(RTCVideoTrack *)track;
