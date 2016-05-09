@@ -1,5 +1,5 @@
 # Apprtc-swift
-Apprtc code written in Swift 2 with Video Mute, Audio Mute, Rotation support
+Apprtc code written in Swift 2 with Video Mute, Audio Mute, Rotation support. Refer to [my blog](https://mobilitysolutionsexpert.wordpress.com/) for more details
 
 ## Instruction
 1. Either run app in 2 devices or run app in one device and open http://apprtc.appspot.com/ 
@@ -19,4 +19,6 @@ Apprtc code written in Swift 2 with Video Mute, Audio Mute, Rotation support
 ##To Do
 
 1) Wifi to LTE and Vice versa handover
+
+
 
