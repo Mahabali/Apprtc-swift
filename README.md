@@ -18,7 +18,12 @@ Apprtc code written in Swift 2 with Video Mute, Audio Mute, Rotation support. Re
 
 ##To Do
 
-1) Wifi to LTE and Vice versa handover
+1) CallKit Integration
+2) Swift 3.0 Upgrade
+
+##To Say Hi
+[Me](https://in.linkedin.com/in/dhilipr)
+[My blog](https://mobilitysolutionsexpert.wordpress.com/)
 
 
 
