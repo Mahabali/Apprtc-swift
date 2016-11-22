@@ -1,46 +1,72 @@
 /*
- * libjingle
- * Copyright 2014, Google Inc.
+ *  Copyright 2014 The WebRTC Project Authors. All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *  1. Redistributions of source code must retain the above copyright notice,
- *     this list of conditions and the following disclaimer.
- *  2. Redistributions in binary form must reproduce the above copyright notice,
- *     this list of conditions and the following disclaimer in the documentation
- *     and/or other materials provided with the distribution.
- *  3. The name of the author may not be used to endorse or promote products
- *     derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
- * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *  Use of this source code is governed by a BSD-style license
+ *  that can be found in the LICENSE file in the root of the source
+ *  tree. An additional intellectual property rights grant can be found
+ *  in the file PATENTS.  All contributing project authors may
+ *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#import "RTCICECandidate+JSON.h"
+#import "RTCIceCandidate+JSON.h"
+
+#import "WebRTC/RTCLogging.h"
 
 static NSString const *kRTCICECandidateTypeKey = @"type";
 static NSString const *kRTCICECandidateTypeValue = @"candidate";
 static NSString const *kRTCICECandidateMidKey = @"id";
 static NSString const *kRTCICECandidateMLineIndexKey = @"label";
 static NSString const *kRTCICECandidateSdpKey = @"candidate";
+static NSString const *kRTCICECandidatesTypeKey = @"candidates";
 
-@implementation RTCICECandidate (JSON)
 
-+ (RTCICECandidate *)candidateFromJSONDictionary:(NSDictionary *)dictionary {
+@implementation RTCIceCandidate (JSON)
+
++ (RTCIceCandidate *)candidateFromJSONDictionary:(NSDictionary *)dictionary {
   NSString *mid = dictionary[kRTCICECandidateMidKey];
   NSString *sdp = dictionary[kRTCICECandidateSdpKey];
   NSNumber *num = dictionary[kRTCICECandidateMLineIndexKey];
   NSInteger mLineIndex = [num integerValue];
-  return [[RTCICECandidate alloc] initWithMid:mid index:mLineIndex sdp:sdp];
+  return [[RTCIceCandidate alloc] initWithSdp:sdp
+                                sdpMLineIndex:mLineIndex
+                                       sdpMid:mid];
+}
+
++ (NSData *)JSONDataForIceCandidates:(NSArray<RTCIceCandidate *> *)candidates
+                            withType:(NSString *)typeValue {
+  NSMutableArray *jsonCandidates =
+      [NSMutableArray arrayWithCapacity:candidates.count];
+  for (RTCIceCandidate *candidate in candidates) {
+    NSDictionary *jsonCandidate = [candidate JSONDictionary];
+    [jsonCandidates addObject:jsonCandidate];
+  }
+  NSDictionary *json = @{
+    kRTCICECandidateTypeKey : typeValue,
+    kRTCICECandidatesTypeKey : jsonCandidates
+  };
+  NSError *error = nil;
+  NSData *data =
+      [NSJSONSerialization dataWithJSONObject:json
+                                      options:NSJSONWritingPrettyPrinted
+                                        error:&error];
+  if (error) {
+    RTCLogError(@"Error serializing JSON: %@", error);
+    return nil;
+  }
+  return data;
+}
+
++ (NSArray<RTCIceCandidate *> *)candidatesFromJSONDictionary:
+    (NSDictionary *)dictionary {
+  NSArray *jsonCandidates = dictionary[kRTCICECandidatesTypeKey];
+  NSMutableArray<RTCIceCandidate *> *candidates =
+      [NSMutableArray arrayWithCapacity:jsonCandidates.count];
+  for (NSDictionary *jsonCandidate in jsonCandidates) {
+    RTCIceCandidate *candidate =
+        [RTCIceCandidate candidateFromJSONDictionary:jsonCandidate];
+    [candidates addObject:candidate];
+  }
+  return candidates;
 }
 
 - (NSData *)JSONData {
@@ -56,10 +82,19 @@ static NSString const *kRTCICECandidateSdpKey = @"candidate";
                                       options:NSJSONWritingPrettyPrinted
                                         error:&error];
   if (error) {
-    NSLog(@"Error serializing JSON: %@", error);
+    RTCLogError(@"Error serializing JSON: %@", error);
     return nil;
   }
   return data;
+}
+
+- (NSDictionary *)JSONDictionary{
+  NSDictionary *json = @{
+    kRTCICECandidateMLineIndexKey : @(self.sdpMLineIndex),
+    kRTCICECandidateMidKey : self.sdpMid,
+    kRTCICECandidateSdpKey : self.sdp
+  };
+  return json;
 }
 
 @end

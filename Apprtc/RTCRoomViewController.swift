@@ -20,44 +20,44 @@ class RTCRoomViewController: UITableViewController,RTCRoomTextInputViewCellDeleg
     // Dispose of any resources that can be recreated.
   }
   
-  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  override func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
   
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 2
   }
   
-  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     var cell:UITableViewCell
     if (indexPath.row == 0){
     var cell:RTCRoomTextInputViewCell
-    cell=tableView.dequeueReusableCellWithIdentifier("RoomInputCell", forIndexPath: indexPath) as! RTCRoomTextInputViewCell
+    cell=tableView.dequeueReusableCell(withIdentifier: "RoomInputCell", for: indexPath) as! RTCRoomTextInputViewCell
     cell.delegate=self
     return cell
     }
     else {
-      cell = tableView.dequeueReusableCellWithIdentifier("MahabaliCell")!
+      cell = tableView.dequeueReusableCell(withIdentifier: "MahabaliCell")!
     }
       return cell
   }
   
-  func shouldJoinRoom(room: NSString, textInputCell: RTCRoomTextInputViewCell) {
-    self.performSegueWithIdentifier("RTCVideoChatViewController", sender: room)
+  func shouldJoinRoom(_ room: NSString, textInputCell: RTCRoomTextInputViewCell) {
+    self.performSegue(withIdentifier: "RTCVideoChatViewController", sender: room)
   }
   
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    print(" to string \(segue.destinationViewController.dynamicType)")
-    let viewController:RTCVideoChatViewController=segue.destinationViewController as! RTCVideoChatViewController
-    viewController.roomName=sender as! String
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    print(" to string \(type(of: segue.destination))")
+    let viewController:RTCVideoChatViewController=segue.destination as! RTCVideoChatViewController
+    viewController.roomName=sender as! String as NSString?
   }
   
-  override func  shouldAutorotate() -> Bool {
+  override var  shouldAutorotate : Bool {
     return false
   }
   
-  override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-    return UIInterfaceOrientationMask.Portrait
+  override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+    return UIInterfaceOrientationMask.portrait
   }
 }
 
