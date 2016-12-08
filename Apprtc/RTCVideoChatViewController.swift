@@ -10,17 +10,6 @@ import UIKit
 import AVFoundation
 import WebRTC
 class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDAppClientDelegate {
-    public func appClient(_ client: ARDAppClient!, didGetStats stats: [Any]!) {
-        
-    }
-
-    public func appClient(_ client: ARDAppClient!, didChange state: RTCIceConnectionState) {
-        
-    }
-
-  
-
-   
 
   //Views, Labels, and Buttons
   @IBOutlet weak var remoteView:RTCEAGLVideoView?
@@ -122,11 +111,11 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
   
   @IBAction func audioButtonPressed (_ sender:UIButton){
     sender.isSelected = !sender.isSelected
-   // self.client?.toggleAudioMute()
+    self.client?.toggleAudioMute()
   }
   @IBAction func videoButtonPressed(_ sender:UIButton){
     sender.isSelected = !sender.isSelected
-   // self.client?.toggleVideoMute()
+    self.client?.toggleVideoMute()
   }
   
   @IBAction func hangupButtonPressed(_ sender:UIButton){
@@ -202,16 +191,6 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
   }
   
   func appClient(_ client: ARDAppClient!, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack!) {
-    // Dirty hack to route audio to speaker. Hack will be removed with library update
-//    DispatchQueue.main.asyncAfter(deadline: 2) { () -> Void in
-//      let audioSession:AVAudioSession = AVAudioSession.sharedInstance()
-//      do{
-//        try audioSession.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
-//      }
-//      catch{
-//        print("Audio Port Error");
-//      }
-//    }
     self.remoteVideoTrack=remoteVideoTrack
     self.remoteVideoTrack?.add(self.remoteView!)
     UIView.animate(withDuration: 0.4, animations: { () -> Void in
@@ -228,6 +207,14 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
     // Hack for rotation to get the right video size
     self.perform(#selector(RTCVideoChatViewController.updateUIForRotation), with: nil, afterDelay: 0.2)
   }
+    
+    public func appClient(_ client: ARDAppClient!, didGetStats stats: [Any]!) {
+        
+    }
+    
+    public func appClient(_ client: ARDAppClient!, didChange state: RTCIceConnectionState) {
+        
+    }
   
   func updateUIForRotation(){
     let statusBarOrientation:UIInterfaceOrientation = UIApplication.shared.statusBarOrientation;

@@ -34,6 +34,7 @@
 #import "ARDWebSocketChannel.h"
 #import "RTCIceCandidate+JSON.h"
 #import "RTCSessionDescription+JSON.h"
+#import <AVFoundation/AVFoundation.h>
 
 static NSString * const kARDDefaultSTUNServerUrl =
     @"stun:stun.l.google.com:19302";
@@ -61,6 +62,12 @@ static BOOL const kARDAppClientEnableRtcEventLog = YES;
 static int64_t const kARDAppClientRtcEventLogMaxSizeInBytes = 5e6;  // 5 MB.
 #endif
 
+@interface ARDAppClient ()
+@property(nonatomic, assign) BOOL audioMute,videoMute;
+@property (nonatomic,weak)RTCVideoTrack *localVideoTrack;
+@property (nonatomic,weak)RTCAudioTrack *localAudioTrack;
+@property (nonatomic,strong)RTCMediaStream *localMediaStream;
+@end
 // We need a proxy to NSTimer because it causes a strong retain cycle. When
 // using the proxy, |invalidate| must be called before it properly deallocs.
 @interface ARDTimerProxy : NSObject
@@ -175,6 +182,10 @@ static int64_t const kARDAppClientRtcEventLogMaxSizeInBytes = 5e6;  // 5 MB.
 }
 
 - (void)configure {
+    [[AVAudioSession sharedInstance]setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+   [[AVAudioSession sharedInstance] setActive:YES
+                     withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation
+                           error:nil];
   _factory = [[RTCPeerConnectionFactory alloc] init];
   _messageQueue = [NSMutableArray array];
   _iceServers = [NSMutableArray arrayWithObject:[self defaultSTUNServer]];
@@ -327,6 +338,15 @@ static int64_t const kARDAppClientRtcEventLogMaxSizeInBytes = 5e6;  // 5 MB.
 #if defined(WEBRTC_IOS)
   RTCStopInternalCapture();
 #endif
+}
+- (void)toggleVideoMute {
+    self.videoMute = !self.videoMute;
+    self.localVideoTrack.isEnabled = !self.videoMute;
+}
+
+- (void)toggleAudioMute {
+    self.audioMute = !self.audioMute;
+    self.localAudioTrack.isEnabled = !self.audioMute;
 }
 
 #pragma mark - ARDSignalingChannelDelegate
@@ -684,6 +704,7 @@ static int64_t const kARDAppClientRtcEventLogMaxSizeInBytes = 5e6;  // 5 MB.
       [_peerConnection senderWithKind:kRTCMediaStreamTrackKindVideo
                              streamId:kARDMediaStreamId];
   RTCVideoTrack *track = [self createLocalVideoTrack];
+  self.localVideoTrack = track;
   if (track) {
     sender.track = track;
     [_delegate appClient:self didReceiveLocalVideoTrack:track];
@@ -692,15 +713,16 @@ static int64_t const kARDAppClientRtcEventLogMaxSizeInBytes = 5e6;  // 5 MB.
 }
 
 - (RTCRtpSender *)createAudioSender {
-  RTCMediaConstraints *constraints = [self defaultMediaAudioConstraints];
-  RTCAudioSource *source = [_factory audioSourceWithConstraints:constraints];
-  RTCAudioTrack *track = [_factory audioTrackWithSource:source
-                                                trackId:kARDAudioTrackId];
-  RTCRtpSender *sender =
-      [_peerConnection senderWithKind:kRTCMediaStreamTrackKindAudio
-                             streamId:kARDMediaStreamId];
-  sender.track = track;
-  return sender;
+    RTCMediaConstraints *constraints = [self defaultMediaAudioConstraints];
+    RTCAudioSource *source = [_factory audioSourceWithConstraints:constraints];
+    RTCAudioTrack *track = [_factory audioTrackWithSource:source
+                                                  trackId:kARDAudioTrackId];
+    self.localAudioTrack = track;
+    RTCRtpSender *sender =
+    [_peerConnection senderWithKind:kRTCMediaStreamTrackKindAudio
+                           streamId:kARDMediaStreamId];
+    sender.track = track;
+    return sender;
 }
 
 - (RTCVideoTrack *)createLocalVideoTrack {
