@@ -36,7 +36,6 @@
 		D878BE5D1B9B6110001AE9CD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D878BE5B1B9B6110001AE9CD /* LaunchScreen.xib */; };
 		D878BEB21B9B637F001AE9CD /* RTCRoomTextInputViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878BEB11B9B637F001AE9CD /* RTCRoomTextInputViewCell.swift */; };
 		D878BEB41B9B754D001AE9CD /* RTCVideoChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878BEB31B9B754D001AE9CD /* RTCVideoChatViewController.swift */; };
-		D8B778861DE4BDD200DFC2E8 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B778851DE4BDD200DFC2E8 /* WebRTC.framework */; };
 		D8B778991DE4C1C100DFC2E8 /* ARDAppEngineClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B778891DE4C1C100DFC2E8 /* ARDAppEngineClient.m */; };
 		D8B7789A1DE4C1C100DFC2E8 /* ARDBitrateTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B7788B1DE4C1C100DFC2E8 /* ARDBitrateTracker.m */; };
 		D8B7789B1DE4C1C100DFC2E8 /* ARDCEODTURNClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B7788D1DE4C1C100DFC2E8 /* ARDCEODTURNClient.m */; };
@@ -145,7 +144,6 @@
 				D875EE931B9C045E008B1DF3 /* libicucore.dylib in Frameworks */,
 				D875EE911B9C0421008B1DF3 /* libsqlite3.0.dylib in Frameworks */,
 				D8B7789F1DE4C32600DFC2E8 /* WebRTC.framework in Frameworks */,
-				D8B778861DE4BDD200DFC2E8 /* WebRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +321,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Dhilip;
 				TargetAttributes = {
 					D878BE4C1B9B6110001AE9CD = {
@@ -428,8 +426,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -474,8 +474,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -494,6 +496,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

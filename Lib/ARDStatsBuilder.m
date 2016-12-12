@@ -83,7 +83,7 @@
 
 - (NSString *)statsString {
     NSMutableString *result = [NSMutableString string];
-    NSString *systemStatsFormat = @"(cpu)%ld%%\n";
+//    NSString *systemStatsFormat = @"(cpu)%ld%%\n";
 //    [result appendString:[NSString stringWithFormat:systemStatsFormat,
 //                          (long)ARDGetCpuUsagePercentage()]];
     

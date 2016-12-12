@@ -19,5 +19,5 @@
 #import <WebRTC/RTCPeerConnection.h>
 #import <WebRTC/RTCEAGLVideoView.h>
 #import <WebRTC/RTCVideoTrack.h>
-
+#import <WebRTC/RTCStatsReport.h>
 #endif

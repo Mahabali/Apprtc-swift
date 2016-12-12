@@ -120,7 +120,7 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
   
   @IBAction func hangupButtonPressed(_ sender:UIButton){
     self.disconnect()
-    self.navigationController?.popToRootViewController(animated: true)
+    let _ = self.navigationController?.popToRootViewController(animated: true)
   }
   
   func disconnect(){

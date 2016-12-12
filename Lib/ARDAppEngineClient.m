@@ -55,12 +55,11 @@ static NSInteger const kARDAppEngineClientErrorBadResponse = -1;
   RTCLog(@"Joining room:%@ on room server.", roomId);
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:roomURL];
   request.HTTPMethod = @"POST";
-  __weak ARDAppEngineClient *weakSelf = self;
+  //__weak ARDAppEngineClient *weakSelf = self;
   [NSURLConnection sendAsyncRequest:request
                   completionHandler:^(NSURLResponse *response,
                                       NSData *data,
                                       NSError *error) {
-    ARDAppEngineClient *strongSelf = weakSelf;
     if (error) {
       if (completionHandler) {
         completionHandler(nil, error);
@@ -100,12 +99,11 @@ static NSInteger const kARDAppEngineClientErrorBadResponse = -1;
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
   request.HTTPMethod = @"POST";
   request.HTTPBody = data;
-  __weak ARDAppEngineClient *weakSelf = self;
+ // __weak ARDAppEngineClient *weakSelf = self;
   [NSURLConnection sendAsyncRequest:request
                   completionHandler:^(NSURLResponse *response,
                                       NSData *data,
                                       NSError *error) {
-    ARDAppEngineClient *strongSelf = weakSelf;
     if (error) {
       if (completionHandler) {
         completionHandler(nil, error);
