@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ARDAppClient.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Apprtc.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,16 @@
 			<true/>
 		</dict>
 		<key>D878BE611B9B6110001AE9CD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D88F03C01E9CFA3B006A74BA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D88F03C81E9CFA3B006A74BA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -52,6 +52,16 @@
                ReferencedContainer = "container:Apprtc.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D88F03C81E9CFA3B006A74BA"
+               BuildableName = "ARDAppClientTests.xctest"
+               BlueprintName = "ARDAppClientTests"
+               ReferencedContainer = "container:Apprtc.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

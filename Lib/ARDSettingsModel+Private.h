@@ -1,5 +1,5 @@
 /*
- *  Copyright 2014 The WebRTC Project Authors. All rights reserved.
+ *  Copyright 2016 The WebRTC Project Authors. All rights reserved.
  *
  *  Use of this source code is governed by a BSD-style license
  *  that can be found in the LICENSE file in the root of the source
@@ -8,11 +8,13 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#import "ARDTURNClient.h"
+#import <Foundation/Foundation.h>
+#import "ARDSettingsModel.h"
 
-// Requests TURN server urls from compute engine on demand.
-@interface ARDCEODTURNClient : NSObject <ARDTURNClient>
+@class ARDSettingsStore;
 
-- (instancetype)initWithURL:(NSURL *)url;
-
+NS_ASSUME_NONNULL_BEGIN
+@interface ARDSettingsModel ()
+- (ARDSettingsStore *)settingsStore;
 @end
+NS_ASSUME_NONNULL_END

@@ -10,6 +10,8 @@ import UIKit
 import AVFoundation
 import WebRTC
 class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDAppClientDelegate {
+   
+
 
   //Views, Labels, and Buttons
   @IBOutlet weak var remoteView:RTCEAGLVideoView?
@@ -31,6 +33,7 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
   @IBOutlet weak var  localViewBottomConstraint:NSLayoutConstraint?
   @IBOutlet weak var  footerViewBottomConstraint:NSLayoutConstraint?
   @IBOutlet weak var  buttonContainerViewLeftConstraint:NSLayoutConstraint?
+    
   var   roomUrl:NSString?;
   var   client:ARDAppClient?;
   var   _roomName:NSString=NSString(format: "")
@@ -40,7 +43,7 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
   var   localVideoSize:CGSize?;
   var   remoteVideoSize:CGSize?;
   var   isZoom:Bool = false; //used for double tap remote view
-  
+    var   captureController:ARDCaptureController = ARDCaptureController()
   override func viewDidLoad() {
     super.viewDidLoad()
     self.isZoom = false;
@@ -69,7 +72,9 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
     self.disconnect()
     self.client=ARDAppClient(delegate: self)
     //self.client?.serverHostUrl="https://apprtc.appspot.com"
-    self.client!.connectToRoom(withId: self.roomName! as String!, isLoopback: false, isAudioOnly: false, shouldMakeAecDump: false, shouldUseLevelControl: false)
+    var settingsModel = ARDSettingsModel()
+    client!.connectToRoom(withId: self.roomName! as String!, settings: settingsModel, isLoopback: false, isAudioOnly: false, shouldMakeAecDump: false, shouldUseLevelControl: false)
+    
     //self.client!.connectToRoom(withId: self.roomName! as String, options: nil)
     self.urlLabel?.text=self.roomName! as String
   }
@@ -189,6 +194,13 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
     self.localVideoTrack?.add(self.localView!)
     
   }
+
+    public func appClient(_ client: ARDAppClient!, didCreateLocalCapturer localCapturer: RTCCameraVideoCapturer!) {
+        let settingsModel = ARDSettingsModel()
+        captureController = ARDCaptureController(capturer: localCapturer, settings: settingsModel)
+        captureController.startCapture()
+    }
+    
   
   func appClient(_ client: ARDAppClient!, didReceiveRemoteVideoTrack remoteVideoTrack: RTCVideoTrack!) {
     self.remoteVideoTrack=remoteVideoTrack
@@ -201,7 +213,9 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
       self.footerViewBottomConstraint?.constant = -80.0
     })
   }
-  
+ 
+
+    
   func appclient(_ client: ARDAppClient!, didRotateWithLocal localVideoTrack: RTCVideoTrack!, remoteVideoTrack: RTCVideoTrack!) {
     NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(RTCVideoChatViewController.updateUIForRotation), object: nil)
     // Hack for rotation to get the right video size

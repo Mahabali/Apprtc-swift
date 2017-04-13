@@ -15,9 +15,11 @@
 #import "ARDRegisterResponse.h"
 #import "ARDSignalingMessage.h"
 #import "ARDUtilities.h"
+#import "ARDSettingsModel.h"
 #import "ARDWebSocketChannel.h"
+#import "ARDCaptureController.h"
 #import <WebRTC/RTCPeerConnection.h>
 #import <WebRTC/RTCEAGLVideoView.h>
 #import <WebRTC/RTCVideoTrack.h>
-#import <WebRTC/RTCStatsReport.h>
+
 #endif
