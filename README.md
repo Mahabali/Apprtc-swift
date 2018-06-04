@@ -1,3 +1,5 @@
+# Deprecated - Code base no longer will be updated. Thanks for your support
+
 # Apprtc-swift
 Apprtc code written in Swift 2 with Video Mute, Audio Mute, Rotation support. Refer to [my blog](https://mobilitysolutionsexpert.wordpress.com/) for more details
 
