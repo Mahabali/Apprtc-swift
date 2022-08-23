@@ -35,8 +35,5 @@ For clarifications or custom implementations or any other stuffs [Contact Form](
 [My blog](https://mobilitysolutionsexpert.wordpress.com/)
 
 
-### My Product
-[whichidiot.com](https://whichidiot.com)
-
 ### My consulting site
 [okchanges.com](https://okchanges.com)
